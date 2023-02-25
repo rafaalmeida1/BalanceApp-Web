@@ -1,5 +1,6 @@
 import { ReactElement, ReactNode } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AccountContextProvider } from "./context/AccountContext";
 import { DefaultLayout } from "./layouts/DefaultLayout";
 import { Dashboard } from "./pages/Dashboard";
@@ -12,12 +13,21 @@ export function Router() {
       <Route
         path="/user"
         element={
-          <AccountContextProvider>
-            <DefaultLayout />
-          </AccountContextProvider>
+          <ProtectedRouter>
+            <AccountContextProvider>
+              <DefaultLayout />
+            </AccountContextProvider>
+          </ProtectedRouter>
         }
       >
-        <Route path=":id" element={<Dashboard />} />
+        <Route
+          path=":id"
+          element={
+            <ProtectedRouter>
+              <Dashboard />
+            </ProtectedRouter>
+          }
+        />
       </Route>
 
       <Route path="/" element={<Home />} />
@@ -34,12 +44,14 @@ interface ProtectedRouterProps {
 export function ProtectedRouter({
   children,
 }: ProtectedRouterProps): ReactElement | any {
+  const navigate = useNavigate();
+
   if (
     localStorage.getItem("@benini-login-auth:1.0.0") ||
     sessionStorage.getItem("@benini-login-auth:1.0.0")
   ) {
     return children;
   } else {
-    return <Navigate to="/login" />;
+    return navigate("/login");
   }
 }
