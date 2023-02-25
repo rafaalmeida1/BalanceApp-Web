@@ -96,7 +96,6 @@ export function RegisterForm({
             <Input
               id="username"
               type="text"
-              autoComplete="username"
               required
               className="bg-white appearance-none rounded-lg relative block w-full px-2 py-1 border border-black placeholder-gray-500 text-black rounded-t-md focus:outline-none focus:ring-violet-900 focus:border-violet-900 focus:z-10 sm:text-sm"
               placeholder="Rafael Almeida"
@@ -113,7 +112,6 @@ export function RegisterForm({
             <Input
               id="email"
               type="email"
-              autoComplete="email"
               required
               className="bg-white appearance-none rounded-lg relative block w-full px-2 py-1 border border-black placeholder-gray-500 text-black rounded-t-md focus:outline-none focus:ring-violet-900 focus:border-violet-900 focus:z-10 sm:text-sm"
               placeholder="email@gmail.com"

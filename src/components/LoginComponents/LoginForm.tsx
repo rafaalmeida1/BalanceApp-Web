@@ -34,8 +34,6 @@ export function LoginForm({ userData, setUserData }: UserDataProps) {
     resolver: zodResolver(LoginFormSchema),
   });
 
-  console.log(userData)
-
   async function handleLoginSubmitForm(data: LoginFormInput) {
     try {
       setLoading(true);

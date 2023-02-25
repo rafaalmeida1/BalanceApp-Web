@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+import classNames from "classnames";
 
 const SignUpFormSchema = z.object({
   email: z.string(),
@@ -52,12 +53,12 @@ export function UserDetailsModal({ onSetModalOpen }: UserDetailsModalProps) {
       reset();
       navigate(`/user/${id}`);
     } catch (err: any) {
-      if (err.response.data.message === "Password is incorrect") {
+      if (err.response.status === 403) {
         setErrorPasswordMatch(true);
         setTimeout(() => {
           setErrorPasswordMatch(false);
         }, 5000);
-      } else if (err.response.data.message === "Passwords are the same") {
+      } else if (err.response.status === 401) {
         setErrorPasswordIsTheSameAsTheNew(true);
         setTimeout(() => {
           setErrorPasswordIsTheSameAsTheNew(false);
