@@ -13,15 +13,19 @@ export function Router() {
       <Route
         path="/user"
         element={
+          <ProtectedRouter>
             <AccountContextProvider>
               <DefaultLayout />
             </AccountContextProvider>
+          </ProtectedRouter>
         }
       >
         <Route
           path=":id"
           element={
+            <ProtectedRouter>
               <Dashboard />
+            </ProtectedRouter>
           }
         />
       </Route>
@@ -31,4 +35,23 @@ export function Router() {
       <Route path="/login" element={<Login />} />
     </Routes>
   );
+}
+
+interface ProtectedRouterProps {
+  children: ReactNode;
+}
+
+export function ProtectedRouter({
+  children,
+}: ProtectedRouterProps): ReactElement | any {
+  const navigate = useNavigate();
+
+  if (
+    localStorage.getItem("@benini-login-auth:1.0.0") ||
+    sessionStorage.getItem("@benini-login-auth:1.0.0")
+  ) {
+    return children;
+  } else {
+    return navigate("/login");
+  }
 }
