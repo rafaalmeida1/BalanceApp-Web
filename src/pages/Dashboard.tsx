@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Loading } from "../components/Loading";
 import { UserCard } from "../components/UserCard";
 import { AccountContext } from "../context/AccountContext";
-import { api } from "../lib/api";
 
 export function Dashboard() {
-  const { user, searchUserLoading, setLoadingUser, setUserById } = useContext(AccountContext)
+  const { getUser, user, searchUserLoading } = useContext(AccountContext)
 
   const navigate = useNavigate();
 
@@ -14,39 +13,13 @@ export function Dashboard() {
     localStorage.getItem("@benini-login-auth:1.0.0")!
   );
 
-  // async function getOnlyUser() {
-  //   await getUser();
-  // }
-
-  const { id } = useParams();
-
-  async function getUser() {
-    try {
-      const response = await api.get(`/user/${id}`, {
-        headers: {
-          "Accept-Control-Allow-Origin": "*",
-        }
-      });
-
-      if (userLoggedIn.userLoggedIn.id === response.data.id) {
-        setUserById(response.data);
-        setLoadingUser(false);
-      } else {
-        navigate(`/login`);
-        localStorage.removeItem("@benini-login-auth:1.0.0");
-        setLoadingUser(false);
-      }
-    } catch (err) {
-      console.log(err);
-      setLoadingUser(false);
-    } finally {
-      setLoadingUser(false);
-    }
+  async function getOnlyUser() {
+    await getUser();
   }
 
   useEffect(() => {
     if (userLoggedIn?.userLoggedIn?.id) {
-      getUser();
+      getOnlyUser();
     } else {
       navigate("/login");
     }

@@ -8,10 +8,10 @@ export default defineConfig({
   }),
 ],
   server: {
-    port: 3003,
+    port: 3000,
     proxy: {
       '/api': {
-        target: 'https://http.cat/',
+        target: 'https://balance-app.cyclic.app',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),
