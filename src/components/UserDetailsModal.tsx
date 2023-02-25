@@ -76,7 +76,7 @@ export function UserDetailsModal({ onSetModalOpen }: UserDetailsModalProps) {
         className="fixed w-screen h-screen inset-0 bg-black opacity-75"
       />
 
-      <Dialog.Content className="text-gray-100 w-[20rem] sm:w-[32rem] rounded-lg py-10 px-12 border border-gray-800 bg-gradient-to-b from-gray-950 to-gray-900 shadow-xl shadow-black fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <Dialog.Content className="z-50 text-gray-100 w-[20rem] sm:w-[32rem] rounded-lg py-10 px-12 border border-gray-800 bg-gradient-to-b from-gray-950 to-gray-900 shadow-xl shadow-black fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <Dialog.Title className="text-xl mb-5">User Details</Dialog.Title>
 
         <Dialog.Close
