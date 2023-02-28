@@ -1,4 +1,4 @@
-import { Eye, EyeClosed, SignOut, User } from "phosphor-react";
+import { Eye, EyeClosed, SignOut, Spinner, User } from "phosphor-react";
 import classNames from "classnames";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
@@ -8,7 +8,8 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { formatPrice } from "../utils/formatPrice";
 
 export function Header() {
-  const { user, setPriceVisible, priceIsVisible } = useContext(AccountContext);
+  const { user, setPriceVisible, priceIsVisible, searchUserLoading } =
+    useContext(AccountContext);
   const navigate = useNavigate();
 
   return (
@@ -70,37 +71,45 @@ export function Header() {
 
       <div className="flex items-center justify-start gap-5 text-gray-100 group transition-all bg-transparent">
         <div className="flex-1 gap-4 flex items-center justify-between flex-wrap ">
-          <div className="flex gap-2">
-            <div
-              className={classNames("text-base font-medium", {
-                "w-[81px] bg-gradient-to-b from-gray-900 to-gray-700 rounded-lg": !priceIsVisible,
-              })}
-            >
-              {priceIsVisible && `${formatPrice(user.user_account?.balance)}`}
-            </div>
+          {searchUserLoading ? (
+            <Spinner className="animate-spin text-violet-600" size={40} />
+          ) : (
+            <>
+              <div className="flex gap-2">
+                <div
+                  className={classNames("text-base font-medium", {
+                    "w-[81px] bg-gradient-to-b from-gray-900 to-gray-700 rounded-lg":
+                      !priceIsVisible,
+                  })}
+                >
+                  {priceIsVisible &&
+                    `${formatPrice(user.user_account?.balance)}`}
+                </div>
 
-            {priceIsVisible ? (
-              <button
-                className="text-gray-100"
-                onClick={() => setPriceVisible(false)}
-              >
-                <Eye size={24} />
-              </button>
-            ) : (
-              <button
-                className="text-gray-100"
-                onClick={() => setPriceVisible(true)}
-              >
-                <EyeClosed size={24} />
-              </button>
-            )}
-          </div>
+                {priceIsVisible ? (
+                  <button
+                    className="text-gray-100"
+                    onClick={() => setPriceVisible(false)}
+                  >
+                    <Eye size={24} />
+                  </button>
+                ) : (
+                  <button
+                    className="text-gray-100"
+                    onClick={() => setPriceVisible(true)}
+                  >
+                    <EyeClosed size={24} />
+                  </button>
+                )}
+              </div>
 
-          <div className=" text-gray-100 bg-transparent border border-violet-900 hover:bg-violet-900 px-4 py-2 rounded-[9999px] flex items-center justify-center cursor-pointer">
-            <span className="text-xl font-bold">
-              {user.username?.split(" ")[0].substring(0, 1)!}
-            </span>
-          </div>
+              <div className=" text-gray-100 bg-transparent border border-violet-900 hover:bg-violet-900 px-4 py-2 rounded-[9999px] flex items-center justify-center cursor-pointer">
+                <span className="text-xl font-bold">
+                  {user.username?.split(" ")[0].substring(0, 1)!}
+                </span>
+              </div>
+            </>
+          )}
 
           <button
             onClick={() => {
