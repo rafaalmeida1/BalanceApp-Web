@@ -11,6 +11,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
+        // target: 'https://balance-app.cyclic.app',
         target: 'https://balance-app.cyclic.app',
         changeOrigin: true,
         secure: false,

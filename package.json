@@ -2,7 +2,7 @@
   "name": "web",
   "private": true,
   "version": "1.0.0",
-  "proxy": "https://balance-app-api.onrender.com/",
+  "proxy": "https://balance-app.cyclic.app/",
   "homepage": "https://balance-app-theta.vercel.app/",
   "type": "module",
   "scripts": {

@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://balance-app-api.onrender.com/api",
+  baseURL: "https://balance-app.cyclic.app/api",
+  // baseURL: "https://balance-app-api.onrender.com/api",
   // baseURL: "http://localhost:3333/api",
 
   headers: {
