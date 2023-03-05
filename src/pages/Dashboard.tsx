@@ -28,7 +28,9 @@ export function Dashboard() {
   return (
     <div className="px-2 pt-28 pb-5 md:px-5 xl:px-20 sm:pt-32 sm:pb-10 text-gray-100 h-full">
       {searchUserLoading ? (
-        <Loading />
+        <div className="mt-16">
+          <Loading />
+        </div>
       ) : (
         <section className="flex flex-col xl:flex-row items-start justify-between w-full h-full">
           <UserCard />

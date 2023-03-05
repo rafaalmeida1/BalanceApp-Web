@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AccountContext } from "../context/AccountContext";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { formatPrice } from "../utils/formatPrice";
+import { Loading } from "./Loading";
 
 export function Header() {
   const { user, setPriceVisible, priceIsVisible, searchUserLoading } =
@@ -72,7 +73,7 @@ export function Header() {
       <div className="flex items-center justify-start gap-5 text-gray-100 group transition-all bg-transparent">
         <div className="flex-1 gap-4 flex items-center justify-between flex-wrap ">
           {searchUserLoading ? (
-            <Spinner className="animate-spin text-violet-600" size={40} />
+            <Loading />
           ) : (
             <>
               <div className="flex gap-2">
